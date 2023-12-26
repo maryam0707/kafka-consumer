@@ -6,8 +6,9 @@ class Program
 {
     static void Main()
     {
+        Console.WriteLine("Kafka terminal launch");
         var config = kafka_output.kafkaConsumerConfig.GetConfig();
-        string topic = "onlineShopping"; // Replace with your topic name
+        string topic = "onlineShopping"; 
         using var consumer = new ConsumerBuilder<Ignore, string>(config).Build();
 
         consumer.Subscribe(topic);
@@ -18,7 +19,7 @@ class Program
                 var consumeResult = consumer.Consume();
                 Console.WriteLine($"Received message: {consumeResult.Message.Value}");
 
-                // Process the message here
+                
                 consumer.Commit(consumeResult);
             }
             catch (ConsumeException e)
